@@ -18,6 +18,8 @@ import json
 import os
 import pep8
 import unittest
+from models import storage
+
 DBStorage = db_storage.DBStorage
 classes = {"Amenity": Amenity, "City": City, "Place": Place,
            "Review": Review, "State": State, "User": User}
@@ -82,6 +84,18 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_new(self):
         """test that new adds an object to the database"""
+    
+    def test_count(self):
+        """ Tests count method db storage """
+        dic = {"name": "Vecindad"}
+        _state = State(**dic)
+        storage.new(_state)
+        dicc = {"name": "Mexico", "state_id": state.id}
+        _city = City(**dicc)
+        storage.new(_city)
+        storage.save()
+        d = storage.count()
+        self.assertEqual(len(storage.all()), d)
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_save(self):
