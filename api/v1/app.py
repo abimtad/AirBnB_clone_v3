@@ -9,6 +9,7 @@ from flasgger import Swagger
 from flask_cors import CORS
 from flasgger.utils import swag_from
 
+app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
