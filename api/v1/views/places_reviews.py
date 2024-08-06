@@ -1,20 +1,19 @@
 #!/usr/bin/python3
 """ objects that handle all default RestFul API actions for Reviews """
 from models.review import Review
-from models.place import Place
 from models.user import User
+from models.place import Place
 from models import storage
-from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
 from flasgger.utils import swag_from
+from api.v1.views import app_views
 
 
 @app_views.route('/places/<place_id>/reviews', methods=['GET'],
                  strict_slashes=False)
 @swag_from('documentation/reviews/get_reviews.yml', methods=['GET'])
 def get_reviews(place_id):
-    """
-    Retrieves the list of all Review objects of a Place
+    """ the list of all Review objects
     """
     place = storage.get(Place, place_id)
 
