@@ -4,8 +4,8 @@ from models.review import Review
 from models.user import User
 from models.place import Place
 from models import storage
-from flask import abort, jsonify, make_response, request
-from flasgger.utils import swag_from
+from flask import abort, jsonify, make_response, request # type: ignore
+from flasgger.utils import swag_from # type: ignore
 from api.v1.views import app_views
 
 
@@ -13,8 +13,8 @@ from api.v1.views import app_views
                  strict_slashes=False)
 @swag_from('documentation/reviews/get_reviews.yml', methods=['GET'])
 def get_reviews(place_id):
-    """ the list of all Review objects
-    """
+    """ the list of all Review objects """
+
     place = storage.get(Place, place_id)
 
     if not place:
@@ -28,9 +28,8 @@ def get_reviews(place_id):
 @app_views.route('/reviews/<review_id>', methods=['GET'], strict_slashes=False)
 @swag_from('documentation/reviews/get_review.yml', methods=['GET'])
 def get_review(review_id):
-    """
-    Retrieves a Review object
-    """
+    """ Retrieves a Review object """
+
     review = storage.get(Review, review_id)
     if not review:
         abort(404)
