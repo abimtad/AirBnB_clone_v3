@@ -33,7 +33,7 @@ def get_places(city_id):
 def get_place(place_id):
     """ Retrieve a Place object """
 
-    plc = storage.get(Plc, place_id)
+    plc = storage.get(Place, place_id)
 
     if not plc:
         abort(404)
@@ -147,14 +147,14 @@ def places_search():
             if state:
                 for cy in state.cty:
                     if cy:
-                        for place in city.places:
+                        for place in cy.places:
                             list_places.append(place)
 
     if cty:
         city_obj = [storage.get(City, c_id) for c_id in cty]
         for cy in city_obj:
             if cy:
-                for place in city.places:
+                for place in cy.places:
                     if place not in list_places:
                         list_places.append(place)
 

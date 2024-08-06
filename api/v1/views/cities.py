@@ -74,7 +74,7 @@ def post_city(state_id):
 
     dt = request.get_json()
     inst = City(**dt)
-    inst.state_id = state.id
+    inst.state_id = st.id
     inst.save()
     return make_response(jsonify(inst.to_dict()), 201)
 
